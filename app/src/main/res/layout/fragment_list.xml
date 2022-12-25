@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListFragment">
+    tools:context=".view.list.ListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_products"
@@ -14,5 +14,7 @@
         tools:itemCount="10"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_product_layout" />
+
+    <include layout="@layout/loading_state_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
