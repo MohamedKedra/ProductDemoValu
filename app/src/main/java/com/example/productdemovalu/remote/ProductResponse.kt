@@ -14,7 +14,8 @@ data class Product(
     val title: String?
 ) : Parcelable
 
+@Parcelize
 data class Rating(
     val count: Int?,
     val rate: Double?
-)
+) : Parcelable

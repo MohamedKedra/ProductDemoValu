@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.productdemovalu.R
 import com.example.productdemovalu.databinding.FragmentListBinding
 import com.example.productdemovalu.remote.Product
@@ -31,7 +32,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productAdapter = ProductAdapter(requireContext())
+
+        productAdapter = ProductAdapter(requireContext()) {
+            val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
+            findNavController().navigate(action)
+        }
+
         initObservable()
     }
 
@@ -49,7 +55,7 @@ class ListFragment : Fragment() {
                 DataState.DataStatus.SUCCESS -> {
                     showHideLoading()
                     productAdapter.submitList(it.getData() as ArrayList<Product>)
-                    with(binding){
+                    with(binding) {
                         rvProducts.adapter = productAdapter
                     }
                 }
@@ -75,7 +81,9 @@ class ListFragment : Fragment() {
         tv_error.isVisible = hasError
         tv_error.text = txt
         btn_retry.isVisible = hasError
-        btn_retry.setOnClickListener { }
+        btn_retry.setOnClickListener {
+            initObservable()
+        }
     }
 
 }
