@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.productdemovalu.R
 import com.example.productdemovalu.databinding.ItemProductLayoutBinding
 import com.example.productdemovalu.remote.Product
 
@@ -16,7 +17,7 @@ class ProductAdapter(private val context: Context, val onItemClick: (Product) ->
     ListAdapter<Product, ProductAdapter.ProductHolder>(ProductDiffCallback()) {
 
     inner class ProductHolder(private val itemProductLayoutBinding: ItemProductLayoutBinding) :
-        ViewHolder(itemProductLayoutBinding.root) , OnClickListener{
+        ViewHolder(itemProductLayoutBinding.root), OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -26,7 +27,7 @@ class ProductAdapter(private val context: Context, val onItemClick: (Product) ->
             with(itemProductLayoutBinding) {
                 product.apply {
                     tvTitle.text = title
-                    tvPrice.text = price.toString()
+                    tvPrice.text = price.toString().plus(context.getString(R.string.currency))
                     Glide.with(context).load(image).into(ivPic)
                 }
             }
